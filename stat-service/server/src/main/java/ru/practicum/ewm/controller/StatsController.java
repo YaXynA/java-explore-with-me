@@ -46,6 +46,7 @@ public class StatsController {
                         .unique(unique)
                         .build()
         );
+
         return results;
     }
 }
