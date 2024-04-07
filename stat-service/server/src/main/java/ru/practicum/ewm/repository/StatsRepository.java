@@ -1,4 +1,3 @@
-
 package ru.practicum.ewm.repository;
 
 import ru.practicum.ewm.EndpointHit;
