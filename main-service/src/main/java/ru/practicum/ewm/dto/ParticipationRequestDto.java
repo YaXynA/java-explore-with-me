@@ -6,8 +6,7 @@ import ru.practicum.ewm.model.enums.RequestStatus;
 
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder

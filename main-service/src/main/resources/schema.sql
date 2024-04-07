@@ -8,31 +8,31 @@ DROP TABLE If EXISTS requests CASCADE;
 
 CREATE TABLE IF NOT EXISTS users
 (
-    id    BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY UNIQUE,
+    id    BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name  VARCHAR(250)        NOT NULL,
     email VARCHAR(254) UNIQUE NOT NULL
     );
 
 CREATE TABLE IF NOT EXISTS categories
 (
-    id   BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY UNIQUE,
+    id   BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name VARCHAR(50) UNIQUE NOT NULL
     );
 
 CREATE TABLE IF NOT EXISTS location
 (
-    id                 BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY UNIQUE,
+    id                 BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     lat                NUMERIC,
     lon                NUMERIC
 );
 
 CREATE TABLE IF NOT EXISTS events
 (
-    id                 BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY UNIQUE,
+    id                 BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     annotation         VARCHAR(2000)               NOT NULL,
     category_id        BIGINT                      NOT NULL,
     confirmed_Requests BIGINT,
-    create_date        TIMESTAMP WITHOUT TIME ZONE,
+    create_date        TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     description        VARCHAR(7000),
     event_date         TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     initiator_id       BIGINT                      NOT NULL,
@@ -53,15 +53,15 @@ CREATE TABLE IF NOT EXISTS requests
     id           BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     event_id     BIGINT NOT NULL,
     requester_id BIGINT NOT NULL,
-    create_date  TIMESTAMP WITHOUT TIME ZONE,
-    status       VARCHAR(20),
+    create_date  TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    status       VARCHAR(20) NOT NULL,
     CONSTRAINT fk_requests_to_event FOREIGN KEY (event_id) REFERENCES events (id),
     CONSTRAINT fk_requests_to_user FOREIGN KEY (requester_id) REFERENCES users (id)
     );
 
 CREATE TABLE IF NOT EXISTS compilations
 (
-    id     BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY UNIQUE,
+    id     BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     pinned BOOLEAN      NOT NULL,
     title  VARCHAR(50) NOT NULL
     );
